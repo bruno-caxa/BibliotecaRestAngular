@@ -1,0 +1,52 @@
+.card {
+  max-width: 300px;
+  margin: 1em 40px;
+}
+
+.div-card {
+  display : flex;
+  min-width: 70em;
+}
+
+//mat-card header
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  height: 5em;
+  overflow-y: auto;
+}
+
+.card-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.card-title {
+  align-self: center;
+  margin: 1em;
+}
+
+.card-button {
+  align-self: center;
+}
+
+.card-subtitle {
+  margin-bottom: 5px;
+}
+
+//mat-card image
+.book-image {
+  height: 31em;
+  width: 23em;
+}
+
+//mat-card infos
+.book-infos {
+  height: 15em;
+  overflow-y: auto;
+}
+
+.actions {
+  text-align: center;
+}

@@ -1,0 +1,34 @@
+.card {
+  min-width: 405,1166666666667px;
+  max-width: 405,1166666666667px;
+  height: fit-content;
+  margin: 1em 40px;
+  overflow: auto;
+}
+
+.card-content {
+  display : flex;
+}
+
+.div-card {
+  align-items: center;
+  display : flex;
+  flex-direction: column;
+  overflow-y: auto;
+  text-align: center;
+}
+
+mat-card-header {
+  display: flex;
+  min-width: max-content;
+  padding: 1em;
+  flex-direction: row-reverse;
+}
+
+mat-card-title {
+  text-align: initial;
+}
+
+.image-book {
+  max-height: 10em;
+}

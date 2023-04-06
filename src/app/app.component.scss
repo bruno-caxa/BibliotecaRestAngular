@@ -1,0 +1,49 @@
+.logo {
+  font-size: larger;
+}
+
+.div-search {
+  text-align: center;
+}
+
+mat-drawer {
+  border-right: 2px solid #212121;
+}
+
+mat-drawer-container {
+  width: 100%;
+  height: 100%;
+}
+
+.user-div {
+  margin-bottom: 1em;
+  min-width: 50%;
+  text-align: center;
+}
+
+.user-name {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-name span {
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.user-options {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  padding: 1em;
+  text-align: center;
+}
+
+.user-icon {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+}

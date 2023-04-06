@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-toolbar color="primary">Login - Enter the required information</mat-toolbar>
+
+  <div class="column-flex mat-elevation-z8">
+    <div class="form-login">
+      <form [formGroup]="formLogin">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" [required]="true" [minlength]="4">
+          <mat-error *ngIf="formLogin.hasError">
+            <span *ngIf="formLogin.controls['username'].hasError('required')">Username is required!</span>
+            <span *ngIf="formLogin.controls['username'].hasError('minlength')">Username must have at least 5 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" [required]="true" [minlength]="3">
+          <mat-error *ngIf="formLogin.hasError">
+            <span *ngIf="formLogin.controls['password'].hasError('required')">Password is required!</span>
+            <span *ngIf="formLogin.controls['password'].hasError('minlength')">Password must have at least 3 characters!</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <div class="buttons">
+        <button mat-raised-button [disabled]="formLogin.invalid" color="primary" (click)="login()">Login</button>
+        <button mat-raised-button color="primary" [routerLink]="'/register'">Register</button><br>
+        <button mat-raised-button [routerLink]="'/books'">Return</button>
+      </div>
+    </div>
+  </div>
+</mat-card>

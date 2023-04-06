@@ -1,0 +1,67 @@
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer #drawer mode="side">
+   <div class="user-div">
+    <mat-icon class="user-icon">person_pin</mat-icon>
+    <div *ngIf="user$ | async as user">
+      <div *ngIf="user.username !== ''" class="user-name">
+        <span>{{user.username}}</span>
+        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>keyboard_arrow_down</mat-icon></button>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/library']" (click)="drawer.close()">Library</button>
+        <button mat-menu-item [routerLink]="['/orders']" (click)="drawer.close()">Orders</button>
+        <button mat-menu-item [routerLink]="['/profile']" (click)="drawer.close()">Profile</button>
+        <button mat-menu-item (click)="logout()" (click)="drawer.close()">Logout</button>
+      </mat-menu>
+    </div>
+   </div>
+
+   <mat-divider></mat-divider>
+
+   <div class="user-options">
+     <mat-list-item [routerLink]="['/books']" (click)="drawer.close()"><button mat-button>Books</button></mat-list-item>
+     <mat-list-item><button mat-button [matMenuTriggerFor]="menuCategory">Categories</button></mat-list-item>
+     <mat-menu #menuCategory="matMenu">
+      <div *ngFor="let category of categories$ | async">
+        <button mat-menu-item [routerLink]="['/books']" [queryParams]="{category: category.name}" (click)="drawer.close()">{{category.name}}</button>
+      </div>
+    </mat-menu>
+
+   </div>
+  </mat-drawer>
+
+  <mat-toolbar color="primary">
+
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>list</mat-icon>
+    </button>
+
+    <button class="logo" mat-button [routerLink]="['/books']">E-Books Library</button>
+
+    <div class="div-search">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" [(ngModel)]="bookSearch">
+        <button *ngIf="bookSearch" matSuffix mat-icon-button aria-label="Clear" (click)="bookSearch=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-icon-button [routerLink]="['/books']" [queryParams]="{searchBook: bookSearch}" (click)="bookSearch=''">
+        <mat-icon>search</mat-icon>
+      </button>
+
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button [routerLink]="['/cart']">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>{{cartSize}}</span>
+    </button>
+
+    <button mat-icon-button [routerLink]="['/login']">
+      <mat-icon>person</mat-icon>
+    </button>
+
+  </mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-toolbar color="primary">Orders</mat-toolbar>
+
+  <div class="column-flex mat-elevation-z8"  *ngIf="orders.length > 0; else ordersEmpty">
+    <mat-paginator (page)="handlePageEvent($event)"
+              [length]="totalPages"
+              [pageSize]="3"
+              [hidePageSize]="true"
+              aria-label="Select page"
+              style="margin-right: 20px;">
+    </mat-paginator>
+
+    <div class="div-card">
+      <mat-card class="card" *ngFor="let order of orders">
+        <span><b>{{ formatDate(order.date) }}</b></span>
+        <div *ngFor="let bookSell of order.booksSell" class="card-content">
+          <mat-card-header>
+            <img class="image-book" src="../../../../assets/images/{{ bookSell.book.image }}">
+            <mat-card-title> {{ bookSell.book.title }} </mat-card-title>
+            <mat-card-title> {{ bookSell.book.author }} </mat-card-title>
+            <mat-card-title> {{ bookSell.book.publishingCompany }} </mat-card-title>
+            <mat-card-title> {{ bookSell.book.category.name }} </mat-card-title>
+            <mat-card-title> R$ {{ bookSell.book.unitPrice }} </mat-card-title>
+          </mat-card-header>
+        </div>
+        <span><b>Total Value: R${{ order.totalValue }}</b></span>
+      </mat-card>
+    </div>
+  </div>
+
+    <ng-template #ordersEmpty>
+   <div class="column-flex mat-elevation-z8">
+     <span style="text-align: center; margin-top: 1em;">You not have orders!</span><br>
+     <button mat-raised-button color="primary" [routerLink]="'/books'">Return</button>
+   </div>
+ </ng-template>
+
+</mat-card>

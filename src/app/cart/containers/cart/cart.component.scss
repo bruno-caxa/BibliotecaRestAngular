@@ -1,0 +1,16 @@
+mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+mat-footer-cell {
+  font-weight: bold;
+}
+
+.button-delete {
+  align-items: center;
+  display: flex;
+  height: 25px;
+  margin: 5px;
+  width: 25px;
+}

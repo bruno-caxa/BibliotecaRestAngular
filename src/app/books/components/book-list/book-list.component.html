@@ -1,0 +1,48 @@
+<div *ngIf="totalPages > 0; else booksEmpty">
+  <mat-paginator (page)="handlePageEvent($event)"
+                [length]="totalPages"
+                [pageSize]="3"
+                [hidePageSize]="true"
+                aria-label="Select page"
+                style="margin-right: 20px;">
+  </mat-paginator>
+
+  <div class="div-card">
+    <mat-card class="card" *ngFor="let book of books">
+
+      <div class="card-header">
+        <div mat-card-avatar class="card-image"></div>
+        <div class="card-title"><b>{{ book.title }}</b></div>
+        <div class="card-button">
+          <button *ngIf="isAdmin" mat-mini-fab color="warn" class="button-delete">
+            <mat-icon (click)="onDeleteBook(book.id)">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <button mat-button  class="card-subtitle" [routerLink]="['/books']" [queryParams]="{category: book.category.name}">
+        <b>{{ book.category.name }}</b>
+      </button>
+
+      <img class="book-image" mat-card-image src="../../../../assets/images/{{ book.image }}">
+
+      <mat-card-content class="book-infos">
+        <b>Price:</b> R$ {{ book.unitPrice }}<br>
+        <b>Author:</b> {{ book.author }}<br>
+        <b>Publishing Company:</b> {{ book.publishingCompany }}<br><br>
+        <p>{{ book.description }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="actions">
+        <button mat-raised-button color="primary" (click)="onAddInCart(book)">Add to Cart</button>
+        <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="onEditBook(book)">Edit Book</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #booksEmpty>
+  <div class="column-flex mat-elevation-z8">
+   <span style="text-align: center; margin-top: 1em;">No books found!</span><br>
+   <button mat-raised-button color="primary" [routerLink]="'/books'">Return</button>
+  </div>
+</ng-template>

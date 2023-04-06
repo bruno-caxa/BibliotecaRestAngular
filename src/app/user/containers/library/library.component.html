@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-toolbar color="primary">Library</mat-toolbar>
+
+<div *ngIf="books.length > 0" class="column-flex mat-elevation-z8" style="overflow-y: auto;">
+
+  <mat-paginator (page)="handlePageEvent($event)"
+    [length]="totalPages"
+    [pageSize]="3"
+    [hidePageSize]="true"
+    aria-label="Select page"
+    style="margin-right: 20px;">
+  </mat-paginator>
+
+  <div class="div-card">
+    <mat-card class="card" *ngFor="let book of books">
+
+      <div class="card-header">
+        <div mat-card-avatar class="card-image"></div>
+        <div class="card-title"><b>{{ book.title }}</b></div>
+      </div>
+      <div class="card-subtitle">
+        <b>{{ book.category.name }}</b>
+      </div>
+
+      <img class="book-image" mat-card-image src="../../../../assets/images/{{ book.image }}">
+
+      <mat-card-content class="book-infos">
+        <b>Author:</b> {{ book.author }}<br>
+        <b>Publishing Company:</b> {{ book.publishingCompany }}<br><br>
+        <p>{{ book.description }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="actions">
+        <button mat-raised-button color="primary">Read the book</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+</mat-card>
