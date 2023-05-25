@@ -1,7 +1,5 @@
-import { Observable } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
 
 import { Book } from '../../model/book';
 

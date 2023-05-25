@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 
 import { User } from './../model/user';
 import { Login, Logout } from './../store/user.actions';
@@ -26,8 +26,10 @@ export class UserService {
   getUserStorage(): Observable<User> {
     const token = localStorage.getItem('token');
 
-    if (token !== null) {
-      this.findByToken(token).subscribe(user => {
+    if (token) {
+      this.findByToken(token)
+          .pipe(take(1))
+          .subscribe(user => {
         this.store.dispatch(Login(user));
       });
     }

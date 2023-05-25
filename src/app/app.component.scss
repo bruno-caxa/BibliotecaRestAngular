@@ -1,3 +1,10 @@
+mat-toolbar {
+  height: max-content;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
 .logo {
   font-size: larger;
 }

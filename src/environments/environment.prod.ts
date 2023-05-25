@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
-};
+  production: false,
+  API: 'http://bibliotecarestspring-production.up.railway.app/',
+  BASE_URL: '/api'
+ };

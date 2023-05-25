@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
+import { take } from 'rxjs';
 
 import { UserService } from './user.service';
 
@@ -14,7 +15,9 @@ export class UserAuthenticatedGuard implements CanActivate {
   constructor(private userService: UserService,
               private router: Router,
               private snackBar: MatSnackBar) {
-    this.userService.getUserStorage().subscribe(user => {
+    this.userService.getUserStorage()
+                    .pipe(take(1))
+                    .subscribe(user => {
       this.loggedIn = false;
       if (user.token !== null && user.token.length > 0 ) {
         this.loggedIn = true;

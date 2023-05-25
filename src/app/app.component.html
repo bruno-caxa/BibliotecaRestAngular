@@ -54,14 +54,17 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-icon-button [routerLink]="['/cart']">
-      <mat-icon>shopping_cart</mat-icon>
-      <span>{{cartSize}}</span>
-    </button>
+    <div>
 
-    <button mat-icon-button [routerLink]="['/login']">
-      <mat-icon>person</mat-icon>
-    </button>
+      <button mat-icon-button [routerLink]="['/cart']">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>{{cartSize}}</span>
+      </button>
+
+      <button mat-icon-button [routerLink]="['/login']">
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
 
   </mat-toolbar>
 <router-outlet></router-outlet>

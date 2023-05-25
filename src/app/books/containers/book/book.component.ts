@@ -42,7 +42,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadBooks(0);
-    this.userIsAdmin();
+    this.loadUser();
   }
 
   ngOnDestroy(): void {
@@ -51,17 +51,23 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   addInCart(book: Book) {
-    this.bookSellService.userPurchasedBooks(this.user.id, book.id)
-                        .pipe(takeUntil(this.unsubscribe))
-                        .subscribe(data => {
-      if (data == 0) {
-        this.cartService.addItem(book);
-        this.snackBar.open('Book added to cart successfully!', 'close', {duration: 5000});
-        this.router.navigate(['/cart']);
+    if (this.user.id != 0) {
+      this.bookSellService.userPurchasedBooks(this.user.id, book.id)
+                          .pipe(takeUntil(this.unsubscribe))
+                          .subscribe(data => {
+        if (data == 0) {
+          this.cartService.addItem(book);
+          this.snackBar.open('Book added to cart successfully!', 'close', {duration: 5000});
+          this.router.navigate(['/cart']);
+          return;
+        }
+        this.snackBar.open('It is not possible to buy this book, it is already in your library!', 'close', {duration: 5000});
         return;
-      }
-      this.snackBar.open('It is not possible to buy this book, it is already in your library!', 'close', {duration: 5000});
-    });
+      });
+    } else {
+      this.router.navigate(['/login']);
+      this.snackBar.open('Please login!', 'close', {duration: 5000});
+    }
   }
 
   changePage(page: number) {
@@ -79,7 +85,7 @@ export class BookComponent implements OnInit, OnDestroy {
                     .subscribe(data => {
       this.loadBooks(this.page);
       this.snackBar.open('Book deleted successfully!', 'close', {duration: 5000});
-    }, error => this.snackBar.open('It is not possible to delete a book that has already been sold!', 'close', {duration: 5000}));
+    });
   }
 
   loadBooks(page: number) {
@@ -114,6 +120,14 @@ export class BookComponent implements OnInit, OnDestroy {
     });
   }
 
+  loadUser() {
+    this.userService.getUserStorage()
+                    .pipe(takeUntil(this.unsubscribe))
+                    .subscribe(user => {
+      this.user = user;
+    });
+  }
+
   openBookForm(book: Book | null) {
     if (book == null) {
       book = new Book();
@@ -136,14 +150,6 @@ export class BookComponent implements OnInit, OnDestroy {
              .pipe(takeUntil(this.unsubscribe))
              .subscribe(c => {
       this.loadBooks(this.page);
-    });
-  }
-
-  userIsAdmin() {
-    this.userService.getUserStorage()
-                    .pipe(takeUntil(this.unsubscribe))
-                    .subscribe(user => {
-      this.user = user;
     });
   }
 
