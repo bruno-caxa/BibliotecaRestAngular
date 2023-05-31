@@ -1,8 +1,8 @@
-import { Category } from './../model/category';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Book } from '../model/book';
+import { Category } from './../model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +33,13 @@ export class BookService {
     return this.httpClient.get<any>(this.API + '/title/' + title + '/page/' + page);
   }
 
-  save(book: Partial<Book>): Observable<any> {
-    return this.httpClient.post<any>(this.API, book);
-  }
-
-  saveImage(image: FormData): Observable<any> {
-    return this.httpClient.post(this.API + '/upload', image, {responseType: 'text'} );
+  save(book: Partial<Book>) {
+    return this.httpClient.post<Book>(this.API, book)
+                          .pipe(take(1))
+                          .subscribe({
+                            error: (err) => {
+                              console.log('erro: ' + err);
+                            }
+                          });
   }
 }

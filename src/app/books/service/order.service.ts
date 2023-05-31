@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart } from 'src/app/cart/model/cart';
-import { BookSell } from 'src/app/model/book-sell';
+import { BookSell } from 'src/app/books/model/book-sell';
 
-import { Order } from './../../model/order';
-import { User } from './../model/user';
+import { Order } from '../model/order';
+import { User } from '../../user/model/user';
 
 @Injectable({
   providedIn: 'root'

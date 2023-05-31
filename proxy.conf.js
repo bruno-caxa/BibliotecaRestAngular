@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: ['/api'],
-    target: 'https://bibliotecarestspring-production.up.railway.app/',
+    target: 'http://localhost:8080',
     secure: false,
     logLevel: 'debug'
   }

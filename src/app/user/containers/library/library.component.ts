@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { take } from 'rxjs';
 import { Book } from 'src/app/books/model/book';
 
-import { BookSellService } from '../../service/booksell.service';
+import { BookSellService } from '../../../books/service/booksell.service';
 import { UserService } from './../../service/user.service';
 
 @Component({
@@ -17,8 +17,10 @@ export class LibraryComponent implements OnInit {
   page = 0;
   totalPages = 0;
 
-  constructor(private bookSellService: BookSellService,
-              private userService: UserService) { }
+  constructor(
+    private bookSellService: BookSellService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
    this.loadBooks(0);
@@ -32,8 +34,8 @@ export class LibraryComponent implements OnInit {
   loadBooks(page: number) {
     this.userService.getUserStorage()
                     .pipe(take(1))
-                    .subscribe(user => {
-                      this.bookSellService.booksSoldByUser(user.id, page)
+                    .subscribe(state => {
+                      this.bookSellService.booksSoldByUser(state.user.id, page)
                                           .pipe(take(1))
                                           .subscribe(data => {
                         this.books = data.content;

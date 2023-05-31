@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 
 import { Book } from '../../model/book';
@@ -8,7 +8,7 @@ import { Book } from '../../model/book';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit {
+export class BookListComponent {
 
   @Input() books: Book[] = [];
   @Input() isAdmin = false;
@@ -20,8 +20,6 @@ export class BookListComponent implements OnInit {
   @Output() deleteBook = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   handlePageEvent(e: PageEvent) {
     this.changePage.emit(e.pageIndex);

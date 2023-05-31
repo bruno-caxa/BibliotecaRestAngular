@@ -9,11 +9,11 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { cartReducer } from './cart/store/cart.reducer';
 import { JwtInterceptor } from './service/jwt.interceptor';
 import { AppMaterialModule } from './shared/app-material.module';
 import { SharedModule } from './shared/shared.module';
 import { userReducer } from './user/store/user.reducer';
+import { cartReducer } from './cart/store/cart.reducer';
 
 export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -29,9 +29,10 @@ export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HttpClientModule,
     NgxMaskModule.forRoot(optionsMask),
     SharedModule,
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('cart', cartReducer),
-    StoreModule.forFeature('user', userReducer),
+    StoreModule.forRoot({
+      cart: cartReducer,
+      user: userReducer
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [

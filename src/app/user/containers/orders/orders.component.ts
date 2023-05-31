@@ -1,35 +1,29 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { take } from 'rxjs';
 
+import { Order } from '../../../books/model/order';
+import { OrderService } from '../../../books/service/order.service';
 import { UserService } from '../../service/user.service';
-import { Order } from './../../../model/order';
-import { OrderService } from './../../service/order.service';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit, OnDestroy {
+export class OrdersComponent implements OnInit {
 
   orders: Order[] = [];
   page = 0;
   totalPages = 0;
 
-  userSubscription = new Subscription();
-  orderSubscription = new Subscription();
-
-  constructor(private orderService: OrderService,
-              private userService: UserService,) { }
+  constructor(
+    private orderService: OrderService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.loadOrders(0);
-  }
-
-  ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
-    this.orderSubscription.unsubscribe();
   }
 
   formatDate(date: Date): string {
@@ -43,13 +37,16 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   loadOrders(page: number) {
-    this.ngOnDestroy();
-    this.userSubscription = this.userService.getUserStorage().subscribe(user => {
-      this.orderSubscription = this.orderService.findByIdUserPaginated(user.id, page).subscribe(data => {
-        this.orders = data.content;
-        this.totalPages = data.totalElements;
-      });
-    });
+    this.userService.getUserStorage()
+                    .pipe(take(1))
+                    .subscribe(state => {
+                      this.orderService.findByIdUserPaginated(state.user.id, page)
+                                       .pipe(take(1))
+                                       .subscribe(data => {
+                                        this.orders = data.content;
+                                        this.totalPages = data.totalElements
+                                       });
+                    });
   }
 
 }

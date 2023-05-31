@@ -1,34 +1,35 @@
-.card {
-  min-width: 405,1166666666667px;
-  max-width: 405,1166666666667px;
-  height: fit-content;
-  margin: 1em 40px;
-  overflow: auto;
-}
-
-.card-content {
-  display : flex;
-}
-
 .div-card {
-  align-items: center;
   display : flex;
   flex-direction: column;
-  overflow-y: auto;
-  text-align: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-mat-card-header {
+.div-card mat-card {
+  margin-top: 0;
   display: flex;
-  min-width: max-content;
-  padding: 1em;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  width: fit-content;
 }
 
-mat-card-title {
-  text-align: initial;
+.order-books {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 14.253rem;
 }
 
-.image-book {
-  max-height: 10em;
+.order-books div {
+  width: 100%;
+}
+
+.order-books img {
+  max-width: 14.253rem;
+  height: 100%;
+  width: 100%;
 }

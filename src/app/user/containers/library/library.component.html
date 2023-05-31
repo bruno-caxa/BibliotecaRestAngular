@@ -1,39 +1,58 @@
-<mat-card>
-  <mat-toolbar color="primary">Library</mat-toolbar>
+<div class="content">
+  <mat-card>
+    <mat-toolbar color="primary">Library</mat-toolbar>
 
-<div *ngIf="books.length > 0" class="column-flex mat-elevation-z8" style="overflow-y: auto;">
+  <div class="column-flex" *ngIf="books.length > 0; else libraryEmpty">
+    <mat-paginator (page)="handlePageEvent($event)"
+      [length]="totalPages"
+      [pageSize]="3"
+      [hidePageSize]="true"
+      aria-label="Select page"
+      style="margin-right: 20px;">
+    </mat-paginator>
 
-  <mat-paginator (page)="handlePageEvent($event)"
-    [length]="totalPages"
-    [pageSize]="3"
-    [hidePageSize]="true"
-    aria-label="Select page"
-    style="margin-right: 20px;">
-  </mat-paginator>
+    <div class="div-card">
+      <mat-card *ngFor="let book of books">
 
-  <div class="div-card">
-    <mat-card class="card" *ngFor="let book of books">
+        <div class="card-header">
+          <div class="card-title"><b>{{ book.title }}</b></div>
+        </div>
 
-      <div class="card-header">
-        <div mat-card-avatar class="card-image"></div>
-        <div class="card-title"><b>{{ book.title }}</b></div>
-      </div>
-      <div class="card-subtitle">
-        <b>{{ book.category.name }}</b>
-      </div>
+        <div class="card-subtitle">
+          <button mat-button [routerLink]="['/books']" [queryParams]="{category: book.category.name}">
+            <b>{{ book.category.name }}</b>
+          </button>
+        </div>
 
-      <img class="book-image" mat-card-image src="../../../../assets/images/{{ book.image }}">
+        <div class="card-info">
+          <div class="book-image">
+            <img mat-card-image [src]="book.imageUrl">
+          </div>
 
-      <mat-card-content class="book-infos">
-        <b>Author:</b> {{ book.author }}<br>
-        <b>Publishing Company:</b> {{ book.publishingCompany }}<br><br>
-        <p>{{ book.description }}</p>
-      </mat-card-content>
+          <div class="book-info">
+            <b>Price:</b> R$ {{ book.unitPrice }}<br>
+            <b>Author:</b> {{ book.author }}<br>
+            <b>Publishing Company:</b> {{ book.publishingCompany }}<br><br>
+          </div>
 
-      <mat-card-actions class="actions">
-        <button mat-raised-button color="primary">Read the book</button>
-      </mat-card-actions>
-    </mat-card>
+          <div class="book-description">
+            <p>{{ book.description }}</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button mat-raised-button color="primary">Read the book</button>
+        </div>
+      </mat-card>
+    </div>
   </div>
+
+  <ng-template #libraryEmpty>
+    <div class="column-flex">
+      <span style="text-align: center; margin-top: 1em;">You library is empty!</span><br>
+      <button mat-raised-button color="primary" [routerLink]="'/books'">Return</button>
+    </div>
+  </ng-template>
+
+  </mat-card>
 </div>
-</mat-card>

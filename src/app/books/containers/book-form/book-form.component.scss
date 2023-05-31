@@ -1,15 +1,88 @@
-mat-dialog-content {
-  max-height: 35em;
-  height: 35em;
+.menu-close {
+  background-color: #3f51b5;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  position: fixed; top: 0; left: 0;
+  z-index: 1;
+  overflow: auto;
+}
+
+.box-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-form form div {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-title {
+  color: #fff;
+}
+
+// .input-image {
+//   display: flex;
+//   align-items: center;
+// }
+
+.picture {
+  color: red;
+  cursor: pointer;
+}
+
+#picture-input {
+  display: none;
+}
+
+.picture-image {
+  display: flex;
+  height: 5rem;
 }
 
 mat-form-field {
-  display: flex;
-  justify-content: left;
-  margin: 1em;
-  width: 20em;
+  color: #fff;
 }
 
-.mat-dialog-actions {
-  margin-left: 5em;
+.one, .two, .three {
+  background-color: #fff;
+  height: 5px;
+  width: 100%;
+  margin: 6px auto;
+  transition-duration: 0.5s;
+}
+
+.menu-toggle {
+  width: 40px;
+  height: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.menu-close .menu-toggle {
+  position: absolute;
+  right: 15px;
+  top: 13px;
+}
+
+.menu-close .menu-toggle .one {
+  transform: rotate(55deg) translate(7px, 7px);
+}
+
+.menu-close .menu-toggle .two {
+  opacity: 0;
+}
+
+.menu-close .menu-toggle .three {
+  transform: rotate(-55deg) translate(9px, -9px);
 }

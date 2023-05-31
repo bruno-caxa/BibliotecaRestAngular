@@ -1,4 +1,4 @@
-import { Book } from '../books/model/book';
+import { Book } from './book';
 import { Order } from './order';
 
 export class BookSell {

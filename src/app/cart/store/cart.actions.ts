@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Book } from 'src/app/books/model/book';
 
 export enum CartActionsType {
@@ -7,14 +7,10 @@ export enum CartActionsType {
   Empty = '[Cart] Empty'
 }
 
-export const Add = (book: Book) => {
-  return <Action>{ type: CartActionsType.Add, payload: book};
-}
+export const Add = createAction(CartActionsType.Add,
+                         props<{book: Book}>());
 
-export const Delete = (bookId: number) => {
-  return <Action>{ type: CartActionsType.Delete, payload: bookId};
-}
+export const Delete = createAction(CartActionsType.Delete,
+                            props<{book: Book}>());
 
-export const Empty = () => {
-  return <Action>{ type: CartActionsType.Empty, payload: ''};
-}
+export const Empty = createAction(CartActionsType.Empty);

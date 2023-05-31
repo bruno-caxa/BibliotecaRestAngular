@@ -1,50 +1,54 @@
+<div class="column-flex">
 <form [formGroup]="formUser">
-  <mat-form-field>
-    <mat-label>Username</mat-label>
-    <input matInput formControlName="username" [required]="true" [minlength]="4">
-    <mat-error *ngIf="formUser.hasError">
-      <span *ngIf="formUser.controls['username'].hasError('required')">Username is required!</span>
-      <span *ngIf="formUser.controls['username'].hasError('minlength')">Username must have at least 5 characters!</span>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" [required]="true" [minlength]="5">
-    <mat-error *ngIf="formUser.hasError">
-      <span *ngIf="formUser.controls['password'].hasError('required')">Password is required!</span>
-      <span *ngIf="formUser.controls['password'].hasError('minlength')">Password must have at least 5 characters!</span>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" [required]="true" [minlength]="5">
-    <mat-error *ngIf="formUser.hasError">
-      <span *ngIf="formUser.controls['email'].hasError('required')">Email is required!</span>
-      <span *ngIf="formUser.controls['email'].hasError('minlength')">Email must have at least 5 characters!</span>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>CPF</mat-label>
-    <input matInput mask="000.000.000-00" formControlName="cpf" [required]="true" [minlength]="11">
-    <mat-error *ngIf="formUser.hasError">
-      <span *ngIf="formUser.controls['cpf'].hasError('required')">CPF is required!</span>
-      <span *ngIf="formUser.controls['cpf'].hasError('minlength')">CPF must have at least 11 characters!</span>
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Telephone</mat-label>
-    <input matInput mask="(00) 0 0000-0000" formControlName="telephone" [required]="true" [minlength]="11">
-    <mat-error *ngIf="formUser.hasError">
-      <span *ngIf="formUser.controls['telephone'].hasError('required')">Telephone is required!</span>
-      <span *ngIf="formUser.controls['telephone'].hasError('minlength')">Telephone must have at least 9 characters!</span>
-    </mat-error>
-  </mat-form-field>
+  <div>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" [required]="true" [minlength]="4">
+      <mat-error *ngIf="formUser.hasError">
+        <span *ngIf="formUser.controls['username'].hasError('required')">Username is required!</span>
+        <span *ngIf="formUser.controls['username'].hasError('minlength')">Username must have at least 5 characters!</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" [required]="true" [minlength]="5">
+      <mat-error *ngIf="formUser.hasError">
+        <span *ngIf="formUser.controls['password'].hasError('required')">Password is required!</span>
+        <span *ngIf="formUser.controls['password'].hasError('minlength')">Password must have at least 5 characters!</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [required]="true" [minlength]="5">
+      <mat-error *ngIf="formUser.hasError">
+        <span *ngIf="formUser.controls['email'].hasError('required')">Email is required!</span>
+        <span *ngIf="formUser.controls['email'].hasError('minlength')">Email must have at least 5 characters!</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CPF</mat-label>
+      <input matInput mask="000.000.000-00" formControlName="cpf" [required]="true" [minlength]="11">
+      <mat-error *ngIf="formUser.hasError">
+        <span *ngIf="formUser.controls['cpf'].hasError('required')">CPF is required!</span>
+        <span *ngIf="formUser.controls['cpf'].hasError('minlength')">CPF must have at least 11 characters!</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Telephone</mat-label>
+      <input matInput mask="(00) 0 0000-0000" formControlName="telephone" [required]="true" [minlength]="11">
+      <mat-error *ngIf="formUser.hasError">
+        <span *ngIf="formUser.controls['telephone'].hasError('required')">Telephone is required!</span>
+        <span *ngIf="formUser.controls['telephone'].hasError('minlength')">Telephone must have at least 9 characters!</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
 </form>
 <div class="buttons">
   <button [disabled]="formUser.invalid" mat-raised-button color="primary" (click)="save()">Save</button>
   <button mat-raised-button [routerLink]="'/books'">Return</button>
+</div>
 </div>

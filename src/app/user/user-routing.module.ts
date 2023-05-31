@@ -6,14 +6,14 @@ import { LoginComponent } from './containers/login/login.component';
 import { OrdersComponent } from './containers/orders/orders.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { RegisterComponent } from './containers/register/register.component';
-import { UserAuthenticatedGuard } from './service/user-authenticated.guard';
-import { UserUnauthenticatedGuard } from './service/user-unauthenticated.guard';
+import { userAuthenticatedGuard } from './guard/user-authenticated.guard';
+import { userUnauthenticatedGuard } from './guard/user-unauthenticated.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [UserUnauthenticatedGuard] },
-  { path: 'library', component: LibraryComponent, canActivate: [UserAuthenticatedGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [UserAuthenticatedGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [UserAuthenticatedGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [userUnauthenticatedGuard] },
+  { path: 'library', component: LibraryComponent, canActivate: [userAuthenticatedGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [userAuthenticatedGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [userAuthenticatedGuard] },
   { path: 'register', component: RegisterComponent }
 ]
 

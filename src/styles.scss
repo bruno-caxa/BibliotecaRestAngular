@@ -18,21 +18,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //CSS global
 mat-card {
-  max-width: 80%;
-  margin: 2em auto;
+  margin-top: 4rem;
+}
+
+mat-toolbar {
+  align-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 2rem auto;
+  justify-content: center;
 }
 
 .column-flex {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
 }

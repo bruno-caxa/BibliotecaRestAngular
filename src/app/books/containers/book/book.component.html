@@ -1,23 +1,26 @@
-<mat-card>
-  <mat-toolbar color="primary">
-    Available Books {{msg}}
+<div class="content" *ngIf="userState$ | async as state">
+  <mat-card>
+    <mat-toolbar color="primary">
+      <span>Available Books</span>
+      <span>{{msg}}</span>
 
-    <span class="example-spacer"></span>
+      <button *ngIf="state.user.isAdmin" mat-icon-button class="button-add" (click)="openBookForm(null)">
+        <mat-icon>library_add</mat-icon>
+      </button>
 
-    <button *ngIf="user.isAdmin" mat-button class="button-add" (click)="openBookForm(null)"><mat-icon>library_add</mat-icon></button>
+    </mat-toolbar>
 
-  </mat-toolbar>
-
-  <div class="column-flex mat-elevation-z8" style="overflow-y: auto;">
-    <app-book-list
-      [books]="books"
-      [isAdmin]="user.isAdmin"
-      [totalPages]="totalPages"
-      (addInCart)="addInCart($event)"
-      (changePage)="changePage($event)"
-      (deleteBook)="deleteBook($event)"
-      (editBook)="editBook($event)"
-    >
-    </app-book-list>
-  </div>
-</mat-card>
+    <div class="column-flex">
+      <app-book-list
+        [books]="books"
+        [isAdmin]="state.user.isAdmin"
+        [totalPages]="totalPages"
+        (addInCart)="addInCart($event)"
+        (changePage)="changePage($event)"
+        (deleteBook)="deleteBook($event)"
+        (editBook)="editBook($event)"
+      >
+      </app-book-list>
+    </div>
+  </mat-card>
+</div>

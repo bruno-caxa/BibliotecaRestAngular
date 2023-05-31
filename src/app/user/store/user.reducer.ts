@@ -1,25 +1,36 @@
-import { ActionModel } from './../../model/action.model';
-import { User } from './../model/user';
-import { UserActionType } from './user.actions';
+import { createAction, createReducer, on, props } from '@ngrx/store';
 
-export const user = new User();
+import { User } from '../model/user';
 
-export function userReducer(state: any, action: ActionModel) {
-  if (!state) {
-    state = user;
-  }
-
-  let stateRef = JSON.parse(JSON.stringify(state));
-  switch (action.type) {
-    case UserActionType.Login:
-      stateRef = action.payload;
-      return stateRef;
-
-    case UserActionType.Logout:
-      stateRef = new User();
-      return stateRef;
-
-    default:
-      return stateRef;
-  }
+export interface IUserState {
+  user: User;
+  loggedIn: boolean;
 }
+
+export const userInitialState: IUserState = {
+  user: new User(),
+  loggedIn: false
+}
+
+export const login = createAction('[User] Login',
+                           props<{user: User}>());
+
+export const logout = createAction('[User] Logout');
+
+export const userReducer = createReducer(
+  userInitialState,
+  on(login, (state, payload) => {
+    state = {
+      user: payload.user,
+      loggedIn: true
+    }
+    return state;
+  }),
+  on(logout, (state) => {
+    state = {
+      user: new User(),
+      loggedIn: false
+    }
+    return state;
+  })
+);

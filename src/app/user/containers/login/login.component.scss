@@ -1,9 +1,6 @@
-mat-form-field {
-  min-width: 80%;
-}
-
 mat-card {
-  max-width: 50%;
+  align-self: center;
+  width: 60%;
 }
 
 .form-login {
@@ -11,7 +8,14 @@ mat-card {
   text-align: center;
 }
 
+.buttons {
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
 .buttons button {
-  margin: 5px;
-  width: 10em;
+  width: 100%;
+  margin-top: 5px;
 }

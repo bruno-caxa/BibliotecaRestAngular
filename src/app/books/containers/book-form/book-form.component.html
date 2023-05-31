@@ -1,76 +1,100 @@
-<h1 mat-dialog-title>Add new Book</h1>
-<div mat-dialog-content>
+<div class="menu-close">
+  <div class="menu-toggle" [mat-dialog-close]>
+    <div class="one"></div>
+    <div class="two"></div>
+  <div class="three"></div>
+</div>
+
+<div class="box-form">
   <form [formGroup]="formBook" enctype="multipart/form-data" >
-    <div>
-      <input type="file" accept="image/*" (change)="inputFileChange($event)">
+    <div class="form-title">
+      <h1>Edit Book or Add New</h1>
     </div>
 
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title" [required]="true" [minlength]="5">
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['title'].hasError('required')">Title is required!</span>
-        <span *ngIf="formBook.controls['title'].hasError('minlength')">Title must have at least 5 characters!</span>
-      </mat-error>
-    </mat-form-field>
+      <label class="picture">
+        <input type="file" accept="image/*" (change)="imageInputChange($event)" id="picture-input">
+        <span class="picture-image">
+          <img [src]="formBook.value.imageUrl">
+          <span *ngIf="!formBook.value.imageUrl">
+            Choose an image
+          </span>
+        </span>
+      </label>
 
-    <mat-form-field>
-      <mat-label>Category</mat-label>
-      <mat-select formControlName="category" [required]="true">
-        <mat-option *ngFor="let category of categories$ | async" [value]="category">{{ category.name }}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['category'].hasError('required')">Category is required!</span>
-      </mat-error>
-    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" [required]="true" [minlength]="5" [maxlength]="50">
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['title'].hasError('required')">Title is required!</span>
+          <span *ngIf="formBook.controls['title'].hasError('minlength')">Title must have at least 5 characters!</span>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Author</mat-label>
-      <input matInput formControlName="author" [required]="true" [minlength]="5">
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['author'].hasError('required')">Author is required!</span>
-        <span *ngIf="formBook.controls['author'].hasError('minlength')">Author must have at least 5 characters!</span>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" [required]="true">
+          <mat-option *ngFor="let category of categories$ | async" [value]="category">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['category'].hasError('required')">Category is required!</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Publishing Company</mat-label>
-      <input matInput formControlName="publishingCompany" [required]="true" [minlength]="5">
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['publishingCompany'].hasError('required')">Publishing company is required!</span>
-        <span *ngIf="formBook.controls['publishingCompany'].hasError('minlength')">Publishing company must have at least 5 characters!</span>
-      </mat-error>
-    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <mat-label>Author</mat-label>
+        <input matInput formControlName="author" [required]="true" [minlength]="5" [maxLength]="50">
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['author'].hasError('required')">Author is required!</span>
+          <span *ngIf="formBook.controls['author'].hasError('minlength')">Author must have at least 5 characters!</span>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Total Pages</mat-label>
-      <input matInput type="number" formControlName="totalPages" [required]="true">
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['totalPages'].hasError('required')">Total pages is required!</span>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Publishing Company</mat-label>
+        <input matInput formControlName="publishingCompany" [required]="true" [minlength]="5" [maxLength]="50">
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['publishingCompany'].hasError('required')">Publishing company is required!</span>
+          <span *ngIf="formBook.controls['publishingCompany'].hasError('minlength')">Publishing company must have at least 5 characters!</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Unit Price</mat-label>
-      <input matInput type="number" formControlName="unitPrice" [required]="true">
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['unitPrice'].hasError('required')">Unit price is required!</span>
-      </mat-error>
-    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <mat-label>Total Pages</mat-label>
+        <input matInput type="number" formControlName="totalPages" [required]="true" [maxlength]="5">
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['totalPages'].hasError('required')">Total pages is required!</span>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea matInput formControlName="description" [required]="true" [minlength]="10"></textarea>
-      <mat-error *ngIf="formBook.hasError">
-        <span *ngIf="formBook.controls['description'].hasError('required')">Description is required!</span>
-        <span *ngIf="formBook.controls['description'].hasError('minlength')">Description must have at least 10 characters!</span>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Unit Price</mat-label>
+        <input matInput type="number" formControlName="unitPrice" [required]="true" [maxLength]="5">
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['unitPrice'].hasError('required')">Unit price is required!</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
 
+    <div>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" [required]="true" [minlength]="10" [maxlength]="255"></textarea>
+        <mat-error *ngIf="formBook.hasError">
+          <span *ngIf="formBook.controls['description'].hasError('required')">Description is required!</span>
+          <span *ngIf="formBook.controls['description'].hasError('minlength')">Description must have at least 10 and 255 characters!</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
   </form>
-<div>
+</div>
 
-<div mat-dialog-actions>
-  <button [disabled]="formBook.invalid" mat-raised-button color="primary" (click)="onSave()">Save</button>
-  <button mat-raised-button mat-dialog-close>Close</button>
+<div class="box-actions">
+  <button [disabled]="formBook.invalid" mat-raised-button (click)="onSave()" [mat-dialog-close]>Save</button>
 </div>

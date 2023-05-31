@@ -1,36 +1,38 @@
-<mat-card>
-  <mat-toolbar color="primary">Shopping Cart</mat-toolbar>
 
-  <div *ngIf="cart$ | async as cartSlice">
-    <div class="column-flex mat-elevation-z8"  *ngIf="cartSlice.books.length > 0; else cartEmpty">
-      <mat-table [dataSource]="cartSlice.books">
+<div class="content">
+  <mat-card>
+    <mat-toolbar color="primary">Shopping Cart</mat-toolbar>
 
-        <ng-container matColumnDef="book">
-          <mat-header-cell *matHeaderCellDef> Book </mat-header-cell>
-          <mat-cell *matCellDef="let book"> {{ book.title }} </mat-cell>
-          <mat-footer-cell *matFooterCellDef> Total Value: </mat-footer-cell>
-        </ng-container>
+    <div *ngIf="cart$ | async as cartSlice">
+      <div class="column-flex"  *ngIf="cartSlice.books.length > 0; else cartEmpty">
+        <mat-table [dataSource]="cartSlice.books">
 
-        <ng-container matColumnDef="unitPrice">
-          <mat-header-cell *matHeaderCellDef> Unit Price </mat-header-cell>
-          <mat-cell *matCellDef="let book"> R$ {{ book.unitPrice }} </mat-cell>
-          <mat-footer-cell *matFooterCellDef> R$ {{cartSlice.totalValue}} </mat-footer-cell>
-        </ng-container>
+          <ng-container matColumnDef="book">
+            <mat-header-cell *matHeaderCellDef> Book </mat-header-cell>
+            <mat-cell *matCellDef="let book"> {{ book.title }} </mat-cell>
+            <mat-footer-cell *matFooterCellDef> Total Value: </mat-footer-cell>
+          </ng-container>
 
-        <ng-container matColumnDef="action">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell style="justify-content: end;" *matCellDef="let book">
-            <button mat-mini-fab color="warn" class="button-delete">
-              <mat-icon (click)="deleteItem(book.id)">delete</mat-icon>
-            </button>
-          </mat-cell>
-          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-        </ng-container>
+          <ng-container matColumnDef="unitPrice">
+            <mat-header-cell *matHeaderCellDef> Unit Price </mat-header-cell>
+            <mat-cell *matCellDef="let book"> R$ {{ book.unitPrice }} </mat-cell>
+            <mat-footer-cell *matFooterCellDef> R$ {{cartSlice.totalValue}} </mat-footer-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
-      </mat-table>
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell style="justify-content: end;" *matCellDef="let book">
+              <button mat-mini-fab color="warn" class="button-delete">
+                <mat-icon (click)="deleteItem(book)">delete</mat-icon>
+              </button>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+        </mat-table>
 
       <br>
       <button mat-raised-button color="primary" (click)="finalizeOrder(cartSlice)">Finalize Order</button>
@@ -39,10 +41,11 @@
   </div>
 
   <ng-template #cartEmpty>
-     <div class="column-flex mat-elevation-z8">
+    <div class="column-flex mat-elevation-z8">
       <span style="text-align: center; margin-top: 1em;">Your shopping cart is empty!</span><br>
       <button mat-raised-button color="primary" [routerLink]="'/books'">Return</button>
-     </div>
+    </div>
   </ng-template>
 
 </mat-card>
+</div>

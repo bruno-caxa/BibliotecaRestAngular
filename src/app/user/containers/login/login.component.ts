@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { take } from 'rxjs';
 
 import { User } from '../../model/user';
 import { UserService } from '../../service/user.service';
@@ -12,48 +12,34 @@ import { UserService } from '../../service/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent {
 
   formLogin = this.formBuilder.group({
-    username: [''],
-    password: ['']
+    username: ['admin'],
+    password: ['123']
   });
-  user = new User();
 
-  private unsubscribe = new Subject<void>;
-
-  constructor(private formBuilder: NonNullableFormBuilder,
-              private userService: UserService,
-              private router: Router,
-              private snackBar: MatSnackBar) { }
-
-  ngOnInit(): void { }
-
-  ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-  }
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   login() {
     this.userService.login(this.formLogin.value)
-                    .pipe(takeUntil(this.unsubscribe))
-                    .subscribe(token => {
-      if (token == null) {
-        this.onError();
-        return;
-      }
-
-      this.userService.getUserStorage()
-                      .pipe(takeUntil(this.unsubscribe))
-                      .subscribe(user => {
-        this.user = user;
-        this.onSuccess();
-      });
-    });
+                    .pipe(take(1))
+                    .subscribe({
+                      next: (user) => {
+                        this.onSuccess(user);
+                      },
+                      error: (err) =>  this.onError()
+                     })
   }
 
-  onSuccess() {
-    this.snackBar.open('Welcome ' + this.user.username + ' to the digital bookstore.', 'close', {duration: 5000});
+  onSuccess(user: User) {
+    this.userService.loadUserInStore(user);
+    this.snackBar.open('Welcome ' + user.username + ' to the digital bookstore.', 'close', {duration: 5000});
     this.router.navigate(['/books']);
   }
 
