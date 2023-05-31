@@ -16,7 +16,7 @@ export class S3AwsService {
   constructor(private httpClient: HttpClient) { }
 
   imageUploadRequest(uploadImage: UploadImageRequest, image: any): Observable<UploadRequestResult> {
-    return this.httpClient.post<UploadRequestResult>(environment + this.API_UPLOAD, uploadImage)
+    return this.httpClient.post<UploadRequestResult>(environment.API + this.API_UPLOAD, uploadImage)
                           .pipe(tap(result => this.saveImageS3(result.uploadSignedUrl, image)));
   }
 

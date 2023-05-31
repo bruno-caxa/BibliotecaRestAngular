@@ -21,7 +21,7 @@ export class UserService {
 
 
   findByToken(token: string): Observable<User> {
-    return this.httpClient.get<User>(environment + this.API + '/token/' + token);
+    return this.httpClient.get<User>(environment.API + this.API + '/token/' + token);
   }
 
   loadUserInStore(user: User): void {
@@ -34,7 +34,7 @@ export class UserService {
   }
 
   login(user: Partial<User>): Observable<User> {
-    return this.httpClient.post<User>(environment + this.API + '/authenticate', user);
+    return this.httpClient.post<User>(environment.API + this.API + '/authenticate', user);
   }
 
   logout(): void {
@@ -43,7 +43,7 @@ export class UserService {
   }
 
   save(user: Partial<User>): void {
-    this.httpClient.post<User>(environment + this.API, user)
+    this.httpClient.post<User>(environment.API + this.API, user)
                    .pipe(take(1))
                    .subscribe();
   }

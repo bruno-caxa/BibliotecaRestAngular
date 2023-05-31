@@ -16,11 +16,11 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   delete(bookId: number): Observable<any> {
-    return this.httpClient.delete<any>(environment + this.API + '/' + bookId);
+    return this.httpClient.delete<any>(environment.API + this.API + '/' + bookId);
   }
 
   findAllCategories(): Observable<any> {
-    return this.httpClient.get<Category[]>(environment + this.API + '/categories');
+    return this.httpClient.get<Category[]>(environment.API + this.API + '/categories');
   }
 
   findAllPaginated(page: number): Observable<any> {
@@ -28,15 +28,15 @@ export class BookService {
   }
 
   findByCategory(category: string, page: number): Observable<any> {
-    return this.httpClient.get<any>(environment + this.API + '/category/' + category + '/page/' + page);
+    return this.httpClient.get<any>(environment.API + this.API + '/category/' + category + '/page/' + page);
   }
 
   findByTitle(title: string, page: number): Observable<any> {
-    return this.httpClient.get<any>(environment + this.API + '/title/' + title + '/page/' + page);
+    return this.httpClient.get<any>(environment.API + this.API + '/title/' + title + '/page/' + page);
   }
 
   save(book: Partial<Book>) {
-    return this.httpClient.post<Book>(environment + this.API, book)
+    return this.httpClient.post<Book>(environment.API + this.API, book)
                           .pipe(take(1))
                           .subscribe({
                             error: (err) => {

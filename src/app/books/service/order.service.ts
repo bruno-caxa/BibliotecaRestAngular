@@ -35,11 +35,11 @@ export class OrderService {
       booksSell: bookSellList
     }
 
-    return this.httpClient.post<any>(environment + this.API, finalizedOrderDto);
+    return this.httpClient.post<any>(environment.API + this.API, finalizedOrderDto);
   }
 
   findByIdUserPaginated(id: number, page: number): Observable<any> {
-    return this.httpClient.get<any>(environment + this.API + '/user/' + id + '/page/' + page);
+    return this.httpClient.get<any>(environment.API + this.API + '/user/' + id + '/page/' + page);
   }
 
 }
