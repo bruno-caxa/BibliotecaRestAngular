@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { UploadImageRequest } from '../model/upload-image-request';
 import { UploadRequestResult } from '../model/upload-request-result';
@@ -15,7 +16,7 @@ export class S3AwsService {
   constructor(private httpClient: HttpClient) { }
 
   imageUploadRequest(uploadImage: UploadImageRequest, image: any): Observable<UploadRequestResult> {
-    return this.httpClient.post<UploadRequestResult>(this.API_UPLOAD, uploadImage)
+    return this.httpClient.post<UploadRequestResult>(environment + this.API_UPLOAD, uploadImage)
                           .pipe(tap(result => this.saveImageS3(result.uploadSignedUrl, image)));
   }
 
