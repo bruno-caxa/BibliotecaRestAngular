@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, take } from 'rxjs';
 import { UploadImageRequest } from 'src/app/s3aws/model/upload-image-request';
@@ -40,7 +39,6 @@ export class BookFormComponent {
     private s3AwsService: S3AwsService,
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<BookFormComponent>
   ) {
     this.categories$ = this.bookService.findAllCategories();
   }
