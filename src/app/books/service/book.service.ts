@@ -35,13 +35,7 @@ export class BookService {
     return this.httpClient.get<any>(environment.API + this.API + '/title/' + title + '/page/' + page);
   }
 
-  save(book: Partial<Book>) {
-    return this.httpClient.post<Book>(environment.API + this.API, book)
-                          .pipe(take(1))
-                          .subscribe({
-                            error: (err) => {
-                              console.log('erro: ' + err);
-                            }
-                          });
+  save(book: Partial<Book>): Observable<Book> {
+    return this.httpClient.post<Book>(environment.API + this.API, book);
   }
 }
