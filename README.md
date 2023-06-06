@@ -11,5 +11,5 @@ Além do usuário comum, temos o "admin" que possui funcionalidades extras, como
 ## Informações de desenvolvimento
 
 - Sistema totalmente responsivo
-- Uso da API Amazon S3, para armazenar as imagens dos livro
+- Uso da API Amazon S3, para armazenar as imagens dos livros
 - Uso do framework Ngrx Store, para armazenar o usuario e itens do carrinho de compra
